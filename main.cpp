@@ -10,6 +10,7 @@ int main() {
 	do {
 		switch (room) {
 		case 1:
+			system("color 82");
 			cout << "You are in room 1. You can go (n)orth" << endl;
 			cin >> choice;
 			if (choice == "north")
