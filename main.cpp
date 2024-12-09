@@ -2,7 +2,7 @@
 using namespace std;
 //global variables
 string choice;
-
+string inv[5];
 int main() {
 	int room = 1;
 
@@ -11,18 +11,28 @@ int main() {
 		switch (room) {
 		case 1:
 			system("color 82");
-			cout << "You are in room 1. You can go (n)orth" << endl;
+			cout << "You are in  (n)orth" << endl;
 			cin >> choice;
 			if (choice == "north")
 				room = 2;
 			break;
 		case 2:
+			if (inv[0] != "axe") {
+				if (inv[0] != "bow") {
+					cout << "You find a axe and a bow you can only pick one" << endl;
+
+				}
+			}
 			cout << "You are in room 2 you can go (e)ast or (s)outh" << endl;
 			cin >> choice;
 			if (choice == "east")
 				room = 3;
 			else if (choice == "south")
-
+				room = 1;
+			else if (choice == "axe")
+				inv[0] = "axe";
+			else if (choice == "bow")
+				inv[0] = "bow";
 				break;
 		case 3:
 			cout << "you are in room 3 you can go (e)ast or (w)est" << endl;
