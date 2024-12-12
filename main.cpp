@@ -4,7 +4,9 @@ using namespace std;
 string choice;
 string inv[5];
 int hp = 100;
+int aura = 100;
 void BattleSim();
+void shop();
 bool room3 = false;
 int main() {
 	srand(time(NULL));
@@ -20,7 +22,8 @@ int main() {
 		switch (room) {
 		case 1:
 			system("color 07");
-			cout << "You get out of a portal and you see a door you can go (n)orth to go into the room " << endl;
+			cout << "You get out of a portal and you look around see a door you can go" << endl;
+			cout << "(n)orth to go into the room " << endl;
 			cin >> choice;
 			if (choice == "north")
 				room = 2;
@@ -38,7 +41,8 @@ int main() {
 					break;
 				}
 			}
-			cout << "You are in room 2 you can go (e)ast or (s)outh" << endl;
+			cout << "You are in a dark creepy cold room the cold aura gives you the chills you want to leave" << endl;
+			cout << "You can go (e)ast or (s)outh" << endl;
 			cin >> choice;
 			if (choice == "east")
 				room = 3;
@@ -51,7 +55,8 @@ int main() {
 				BattleSim();
 				room3 = true;
 			}
-			cout << "you are in room 3 you can go (e)ast or (w)est" << endl;
+			cout << "You took some damage but you will live btw you got 500 AURA points for killing that zombie" << endl;
+			cout << "Now you can go (e)ast or (w)est" << endl;
 			cin >> choice;
 			if (choice == "east")
 				room = 4;
@@ -59,11 +64,20 @@ int main() {
 				break;
 		case 4:
 			system("color 07");
-			cout << "You are in room 4 you can go (s)outh or (w)est" << endl;
+			if (inv[2] != "sheild") {
+				cout << "You are exploring the room looking for anything to help you escape" << endl;
+				cout << "you see a skeleton with a sheild that you can use will you pick it up" << endl;
+				cin >> choice;
+				if (choice == "sheild")
+					inv[2] = "sheild", cout << "You picked up the sheild." << endl;
+				break;
+			}
+			cout << "You can go (s)outh or (w)est" << endl;
 			cin >> choice;
 			if (choice == "south")
 				room = 5;
 			else if (choice == "west")
+				room = 3;
 				break;
 		case 5:
 			cout << "You are in room 5 you can go (e)ast or (s)outh" << endl;
@@ -104,6 +118,7 @@ int main() {
 				room = 7;
 			break;
 		case 9:
+			shop();
 			cout << "You are in 9 you can go (n)orth or (e)ast" << endl;
 			cin >> choice;
 			if (choice == "east")
@@ -133,14 +148,29 @@ void BattleSim() {
 	while (hp > 0 && MonsterHealth > 0) {
 		// monster attack sequence
 		if (inv[1] == "armor") {
-			hit = rand() % 7 + 2; // monster dmg
+			hit = rand() % 11 + 5; // monster does 5-15 dmg 
 			cout << "The monster hits you and you take " << hit << " dmg" << endl;
 			hp -= hit;
 
 		}
 
+		else if (inv[2] == "sheild") {
+			hit = rand() % 11 + 5; // monster does 5-15 dmg 
+			cout << "The monster hits you and you take " << hit << " dmg" << endl;
+			hp -= hit;
+
+		}
+
+		else if (inv[1] == "armor") {
+			if (inv[2] == "sheild") {
+				hit = rand() % 6 + 5; // monster does 5-10 dmg 
+				cout << "The monster hits you and you take " << hit << " dmg" << endl;
+				hp -= hit;
+			}
+		}
+
 		else {
-			hit = rand() % 10 + 5;
+			hit = rand() % 16 + 5; // monster does 5-20 dmg
 			cout << "Monster bites you and you take " << hit << " dmg" << endl;
 			hp -= hit;
 
@@ -188,7 +218,33 @@ void BattleSim() {
 
 
 	}
+	cout << "You Win" << endl;
 	cout << "-----------------------------------------------------------------------------" << endl;
+	system("color 07");
+}
 
-
+void shop() {
+	char input = 'a';
+	cout << endl << endl << "---------------------------------------------------------" << endl;
+	cout << "welcome to the AURA shop!" << endl;
+	cout << "type 'q' to quit" << endl;
+	while (input != 'q') {
+		cout << "Pick an item: h) HP potion d) dog ?) ??? " << endl;
+		cin >> input;
+		switch (input) {
+		case 'h':
+			cout << "Heres your HP potion" << endl;
+			inv[3] = "potion";
+			break;
+		case 'd':
+			cout << "Heres your dog" << endl;
+			inv[4] = "jeremy";
+			break;
+		case '?':
+			cout << "Heres your ???" << endl;
+			hp -= 100;
+			break;
+		}
+		cout << "---------------------------------------------------------" << endl;
+	}
 }
