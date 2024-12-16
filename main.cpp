@@ -1,4 +1,5 @@
 #include<iostream>
+#include<Windows.h>
 using namespace std;
 //global variables
 string choice;
@@ -34,8 +35,11 @@ int main() {
 					cout << "You enter the room and in the corner of youre eye you see a dead zombie with a" << endl;
 					cout << "axe and bow but you can only pick one what will you pick?" << endl;
 					cin >> choice;
-					if (choice == "axe")
-						inv[0] = "axe", cout << "You picked up the axe and the bow turned into ash" << endl;
+					if (choice == "axe") {
+						inv[0] = "axe";
+						cout << "You picked up the axe and the bow turned into ash" << endl;
+						PlaySound(TEXT("Pokemon_Item_Found_Sound_Effect.wav"), NULL, SND_FILENAME);
+					}
 					else if (choice == "bow")
 						inv[0] = "bow", cout << "You picked up the bow and the axe flew away" << endl;
 					break;
@@ -55,7 +59,7 @@ int main() {
 				BattleSim();
 				room3 = true;
 			}
-			cout << "You took some damage but you will live btw you got 500 AURA points for killing that zombie" << endl;
+			cout << "You took some damage but you will live oh you got 500 AURA points for killing that zombie" << endl;
 			cout << "Now you can go (e)ast or (w)est" << endl;
 			cin >> choice;
 			if (choice == "east")
@@ -72,7 +76,8 @@ int main() {
 					inv[2] = "sheild", cout << "You picked up the sheild." << endl;
 				break;
 			}
-			cout << "You can go (s)outh or (w)est" << endl;
+			cout << "You explore a dark crawl space you go in its really tight" << endl;
+			cout << "Wll u turn back (w)est or keep going (s)outh" << endl;
 			cin >> choice;
 			if (choice == "south")
 				room = 5;
@@ -80,7 +85,8 @@ int main() {
 				room = 3;
 				break;
 		case 5:
-			cout << "You are in room 5 you can go (e)ast or (s)outh" << endl;
+			cout << "While you explore the room you trip on a bag and fall you open the bag and find 1000" << endl;
+			cout << "Aura points now you can go (e)ast or (s)outh" << endl; 
 			cin >> choice;
 			if (choice == "east")
 				room = 7;
