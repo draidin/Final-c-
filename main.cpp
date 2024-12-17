@@ -7,6 +7,7 @@ string inv[5];
 int hp = 100;
 int aura = 100;
 void BattleSim();
+void larrysim();
 void shop();
 bool room3 = false;
 int main() {
@@ -38,7 +39,7 @@ int main() {
 					if (choice == "axe") {
 						inv[0] = "axe";
 						cout << "You picked up the axe and the bow turned into ash" << endl;
-						PlaySound(TEXT("Pokemon_Item_Found_Sound_Effect.wav"), NULL, SND_FILENAME);
+						//PlaySound(TEXT("Pokemon_Item_Found_Sound_Effect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 					}
 					else if (choice == "bow")
 						inv[0] = "bow", cout << "You picked up the bow and the axe flew away" << endl;
@@ -83,10 +84,10 @@ int main() {
 				room = 5;
 			else if (choice == "west")
 				room = 3;
-				break;
+			break;
 		case 5:
 			cout << "While you explore the room you trip on a bag and fall you open the bag and find 1000" << endl;
-			cout << "Aura points now you can go (e)ast or (s)outh" << endl; 
+			cout << "Aura points now you can go (e)ast or (s)outh" << endl;
 			cin >> choice;
 			if (choice == "east")
 				room = 7;
@@ -103,20 +104,21 @@ int main() {
 					inv[1] = "armor";
 				break;
 			}
-			cout << "You are in 6 you can go (n)orth" << endl;
+			cout << "You can go (n)orth" << endl;
 			cin >> choice;
 			if (choice == "north")
 				room = 5;
 			break;
 		case 7:
-			cout << "You are in 7 you can go (w)est or (e)ast" << endl;
+			cout << "You walk into the next room then you step into a puddle of goo that stinks more then noah" << endl;
+			cout << "After you get out of the goo you hera a loud roar you can go (w)est or (e)ast" << endl;
 			cin >> choice;
 			if (choice == "east")
 				room = 8;
 			else if (choice == "west")
 				break;
 		case 8:
-			cout << "You are in 8 you can go (s)outh or (w)est" << endl;
+			cout << "while you get closer to the doors the roars get louder you can go (s)outh or (w)est" << endl;
 			cin >> choice;
 			if (choice == "south")
 				room = 9;
@@ -125,7 +127,8 @@ int main() {
 			break;
 		case 9:
 			shop();
-			cout << "You are in 9 you can go (n)orth or (e)ast" << endl;
+			cout << "You are right infront of The door you can hear the beast sniffing you because of the goo" << endl;
+			cout << "That you stept in you can go (n)orth or (e)ast" << endl;
 			cin >> choice;
 			if (choice == "east")
 				room = 10;
@@ -133,7 +136,19 @@ int main() {
 				room = 8;
 			break;
 		case 10:
-			cout << "You are in room 10 you can go (w)est" << endl;
+			cout << "	     _____()() " << endl;
+			cout << "       /       @@      " << endl;
+			cout << " `~~~~~\\_; m__m._>o        " << endl;
+			if (inv[4] == "jeremy") {
+				cout << "You see the exit and the mice named Larry gaurding it and you tell jeremy to go eat him" << endl;
+				cout << "Jeremy starts running at him and Larys mouth opens and eats jeremy  " << endl;
+				cout << "You are speechless as the dog that u had for 30 seconds is now dead " << endl;
+				cout << "Now you are mad and BALKIN RAGE KICKS IN +50 HP" << endl;
+				hp += 50;
+			}
+			else
+				cout << "You see the exit and the mice named Larry gaurding the exit" << endl;
+			larrysim();
 			cin >> choice;
 			if (choice == "west")
 				room = 9;
@@ -229,6 +244,94 @@ void BattleSim() {
 	system("color 07");
 }
 
+void larrysim() {
+	int LarryHealth = 200;
+	int hit;
+	int choice;
+	int escape;
+	cout << endl << "---------BATTLE----------" << endl;
+	system("color 04");
+	while (hp > 0 && LarryHealth > 0) {
+		// monster attack sequence
+
+		if (inv[1] == "armor") {
+			if (inv[2] == "sheild") {
+				hit = rand() % 16 + 5; // monster does 5-20 dmg 
+				cout << "Larry hits you and you take " << hit << " dmg" << endl;
+				hp -= hit;
+			}
+		}
+
+		if (inv[1] == "armor") {
+			hit = rand() % 26 + 5; // monster does 5-30 dmg 
+			cout << "Larry hits you and you take " << hit << " dmg" << endl;
+			hp -= hit;
+
+		}
+
+		else if (inv[2] == "sheild") {
+			hit = rand() % 26 + 5; // monster does 5-30 dmg 
+			cout << "Larry hits you and you take " << hit << " dmg" << endl;
+			hp -= hit;
+
+		}
+
+
+
+		else {
+			hit = rand() % 16 + 5; // monster does 5-20 dmg
+			cout << "Larry switch cheese you and you take " << hit << " dmg" << endl;
+			hp -= hit;
+
+		}
+
+
+		cout << "Press 1 to attack, 2 to try to escape." << endl;
+		cin >> choice;
+		switch (choice) {
+		case 1:
+			//player attack sequence
+			if (inv[0] == "axe") {
+				hit = rand() % 26 + 10; //hit for 10-35 dmg
+				cout << "You slash the monster for " << hit << " dmg" << endl;
+				LarryHealth -= hit;
+
+			}
+
+			else if (inv[0] == "bow") {
+				hit = rand() % 11 + 5; // 5-15 dmg
+				cout << "You shoot the monster for " << hit << " dmg" << endl;
+				LarryHealth -= hit;
+
+			}
+			break;
+		case 2: // try to escape
+			escape = rand() % 100 + 1;
+			if (escape > 61) {
+				cout << "You successfully escape!" << endl;
+				LarryHealth = 0;
+
+			}
+			else if (escape < 61) {
+				cout << "You were unable to escape" << endl;
+			}
+			break;
+
+		}// end switch
+
+
+		cout << "HP: " << hp << endl;
+		cout << "Larry HP: " << LarryHealth << endl;
+
+
+
+
+	}
+	cout << "You Win" << endl;
+	cout << "-----------------------------------------------------------------------------" << endl;
+	system("color 07");
+}
+
 void shop() {
 	char input = 'a';
 	cout << endl << endl << "---------------------------------------------------------" << endl;
@@ -239,15 +342,15 @@ void shop() {
 		cin >> input;
 		switch (input) {
 		case 'h':
-			cout << "Heres your HP potion" << endl;
+			cout << "Heres your HP potion -200" << endl;
 			inv[3] = "potion";
 			break;
 		case 'd':
-			cout << "Heres your dog" << endl;
+			cout << "Heres your dog -400" << endl;
 			inv[4] = "jeremy";
 			break;
 		case '?':
-			cout << "Heres your ???" << endl;
+			cout << "Heres your ??? you can have it for free" << endl;
 			hp -= 100;
 			break;
 		}
