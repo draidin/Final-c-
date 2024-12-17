@@ -24,8 +24,8 @@ int main() {
 		switch (room) {
 		case 1:
 			system("color 07");
-			cout << "You get out of a portal and you look around see a door you can go" << endl;
-			cout << "(n)orth to go into the room " << endl;
+			cout << "You get out of a portal you see zombies in cages you try to go back but the time machine broke" << endl;
+			cout << "now you have to find a new machine so you look around and you see a door you can go (n)orth " << endl;
 			cin >> choice;
 			if (choice == "north")
 				room = 2;
@@ -137,17 +137,17 @@ int main() {
 			break;
 		case 10:
 			cout << "	     _____()() " << endl;
-			cout << "       /       @@      " << endl;
+			cout << "       /       @@\      " << endl;
 			cout << " `~~~~~\\_; m__m._>o        " << endl;
 			if (inv[4] == "jeremy") {
-				cout << "You see the exit and the mice named Larry gaurding it and you tell jeremy to go eat him" << endl;
+				cout << "You see the new machine and the mice named Larry gaurding it and you tell jeremy to go eat him" << endl;
 				cout << "Jeremy starts running at him and Larys mouth opens and eats jeremy  " << endl;
 				cout << "You are speechless as the dog that u had for 30 seconds is now dead " << endl;
 				cout << "Now you are mad and BALKIN RAGE KICKS IN +50 HP" << endl;
 				hp += 50;
 			}
 			else
-				cout << "You see the exit and the mice named Larry gaurding the exit" << endl;
+				cout << "You see the machine and the mice named Larry gaurding it" << endl;
 			larrysim();
 			cin >> choice;
 			if (choice == "west")
